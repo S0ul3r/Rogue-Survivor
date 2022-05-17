@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public class RoomNodeGraphEditor : MonoBehaviour
+public class RoomNodeGraphEditor : EditorWindow
 {
-    // Start is called before the first frame update
-    void Start()
+    [MenuItem("Room Node Graph Editor", menuItem = "Window/Dungeon Editor/Room Node Graph Editor")]
+    public static void OpenWindow()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Get existing open window or if none, make a new one:
+        GetWindow<RoomNodeGraphEditor>("Room Node Graph Editor");
     }
 }
