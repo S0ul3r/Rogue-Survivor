@@ -5,12 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RoomNodeTypeListSO", menuName = "Scriptable Objects/Dungeon/Room Node Type List")]
 public class RoomNodeTypeListSO : ScriptableObject
 {
-    #region Header RoomNodeTypeList
+    #region Header ROOM NODE TYPE LIST
     [Space(10)]
-    [Header("RoomNodeTypeList")]
+    [Header("ROOM NODE TYPE LIST")]
     #endregion
     #region Tooltip
-    [Tooltip("Lista powinna byc wypelniona wszystkimi RoomNodeTypeSO gry - wykorzystujemy to zamiast enumerate")]
+    [Tooltip("Lista powinna byc wypelniona wszystkimi RoomNodeTypeSO gry - wykorzystujemy count() zamiast enumerate")]
     #endregion
     public List<RoomNodeTypeSO> list;
 

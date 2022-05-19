@@ -6,33 +6,33 @@ using UnityEngine;
 public class RoomNodeTypeSO : ScriptableObject
 {
     public string roomNodeTypeName;
-    
+
     #region Header
     [Header("Flaguj jedynie RoomNodeTypes ktore powinne byc widzialne w edytorze")]
     #endregion Header
-    public bool isVisibleInNodeGraphEditor;
+    public bool displayInNodeGraphEditor = true;
     #region Header
-    [Header("Jeden z typów powinnen byc korytarzem")]
+    [Header("Czy jest korytarzem")]
     #endregion Header
     public bool isCorridor;
     #region Header
-    [Header("Jeden z typów powinnen byc korytarzemNS")]
+    [Header("Czy jest CorridorNS ")]
     #endregion Header
     public bool isCorridorNS;
     #region Header
-    [Header("Jeden z typów powinnen byc korytarzemEW")]
+    [Header("Czy jest CorridorEW")]
     #endregion Header
     public bool isCorridorEW;
     #region Header
-    [Header("Jeden z typów powinnen byc wejsciem")]
+    [Header("Czy jest Entrance")]
     #endregion Header
     public bool isEntrance;
     #region Header
-    [Header("Jeden z typów powinnen byc Boos Room")]
+    [Header("Czy jest Boss Room")]
     #endregion Header
     public bool isBossRoom;
     #region Header
-    [Header("Jeden z typów powinnen byc niczym")]
+    [Header("Czy jest None (Unassigned)")]
     #endregion Header
     public bool isNone;
 
@@ -43,5 +43,5 @@ public class RoomNodeTypeSO : ScriptableObject
         HelperUtilities.ValidateCheckEmptyString(this, nameof(roomNodeTypeName), roomNodeTypeName);
     }
 #endif
-    #endregion Validation
+    #endregion
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public static class HelperUtilities
 {
-
     /// <summary>
     /// Empty string debug check
     /// </summary>
@@ -45,7 +44,7 @@ public static class HelperUtilities
             error = true;
             Debug.LogError(thisObject.name.ToString() + ": " + fieldName + " is empty and must contain a value to be used.");
         }
-        
+
         return error;
     }
 }
