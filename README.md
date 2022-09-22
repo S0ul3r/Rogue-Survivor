@@ -1,2 +1,3 @@
 # Rogue-Survivor
-2D Unity based rogue-like game
+
+2D Unity based rogue-like game havily inspired by "The Binding of Isaac"
