@@ -220,7 +220,74 @@ public class RoomNodeSO : ScriptableObject
     /// </summary>
     public bool AddChildIDToRoomNode(string childID)
     {
-        childRoomNodeIDList.Add(childID);
+        // child room node validation 
+        if (isChildRoomValid(childID))
+        {
+            childRoomNodeIDList.Add(childID);
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Validaton for child room if it can be added to parent room
+    /// </summary>
+    public bool isChildRoomValid(string childID)
+    {
+        bool hasBossRoom = false;
+
+        // Check if there is boss room in node graph and is connected 
+        foreach (RoomNodeSO roomNode in roomNodeGraph.roomNodeList)
+        {
+            if (roomNode.roomNodeType.isBossRoom && roomNode.parentRoomNodeIDList.Count > 0)
+                hasBossRoom = true;
+        }
+
+        // Check if child node is not connected to itself
+        if (childID == id)
+            return false;
+
+        // Check if child node is already connected to parent node
+        if (parentRoomNodeIDList.Contains(childID))
+            return false;
+
+        // Check if the child node had a parent node
+        if (roomNodeGraph.GetRoomNode(childID).parentRoomNodeIDList.Count > 0)
+            return false;
+
+        // Check if child room is already connected to boss room and is not boss room
+        if (roomNodeGraph.GetRoomNode(childID).roomNodeType.isBossRoom && hasBossRoom)
+            return false;
+
+        // Check if child room is none type
+        if (roomNodeGraph.GetRoomNode(childID).roomNodeType.isNone)
+            return false;
+
+        // check if the node already has a child with this childID
+        if (childRoomNodeIDList.Contains(childID))
+            return false;
+
+        // Check if child node is corridor it cannot be connected to corridor
+        if (roomNodeType.isCorridor && roomNodeGraph.GetRoomNode(childID).roomNodeType.isCorridor)
+            return false;
+
+        // Check if a child node is not a corridor it cannot be connected to non corridor
+        if (!roomNodeType.isCorridor && !roomNodeGraph.GetRoomNode(childID).roomNodeType.isCorridor)
+            return false;
+
+        // Check if child room is an entrance (entrance is always top parent node)
+        if (roomNodeGraph.GetRoomNode(childID).roomNodeType.isEntrance)
+            return false;
+
+
+        // When adding child node room to corridor check if that corridor doesnt have any other child rooms
+        if (childRoomNodeIDList.Count > 0 && !roomNodeGraph.GetRoomNode(childID).roomNodeType.isCorridor)
+            return false;
+        
+        // When a child node is a corridor it cannot have more than max child corridors
+        if (roomNodeGraph.GetRoomNode(childID).roomNodeType.isCorridor && childRoomNodeIDList.Count >= Settings.maxChildCorridors)
+            return false;
+        
         return true;
     }
 

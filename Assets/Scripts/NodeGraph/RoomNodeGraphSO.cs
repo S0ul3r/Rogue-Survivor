@@ -28,6 +28,22 @@ public class RoomNodeGraphSO : ScriptableObject
         }
     }
 
+    /// <summary>
+    ///  Get room node by id
+    /// </summary>
+    public RoomNodeSO GetRoomNode(string id)
+    {
+        if (roomNodeDictionary.ContainsKey(id))
+        {
+            return roomNodeDictionary[id];
+        }
+        else
+        {
+            Debug.LogError("RoomNodeDictionary does not contain key: " + id);
+            return null;
+        }
+    }
+
     #region Editor Code
 
     // This part shoud only be run in Unity
