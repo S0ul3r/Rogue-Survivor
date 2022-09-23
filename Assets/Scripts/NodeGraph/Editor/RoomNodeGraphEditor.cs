@@ -5,6 +5,7 @@ using UnityEngine;
 public class RoomNodeGraphEditor : EditorWindow
 {
     private GUIStyle roomNodeStyle;
+    private GUIStyle selectedRoomNodeStyle;
     private static RoomNodeGraphSO currentRoomNodeGraph;
     private RoomNodeSO currentRoomNode = null;
     private RoomNodeTypeListSO roomNodeTypeList;
@@ -27,6 +28,9 @@ public class RoomNodeGraphEditor : EditorWindow
 
     private void OnEnable()
     {
+        // Selection changed event
+        Selection.selectionChanged += OnSelectionChanged;
+
         // Layout style definition
         roomNodeStyle = new GUIStyle();
         roomNodeStyle.normal.background = EditorGUIUtility.Load("node1") as Texture2D;
@@ -34,8 +38,21 @@ public class RoomNodeGraphEditor : EditorWindow
         roomNodeStyle.padding = new RectOffset(nodePadding, nodePadding, nodePadding, nodePadding);
         roomNodeStyle.border = new RectOffset(nodeBorder, nodeBorder, nodeBorder, nodeBorder);
 
+        // Selected node style definition
+        selectedRoomNodeStyle = new GUIStyle();
+        selectedRoomNodeStyle.normal.background = EditorGUIUtility.Load("node1 on") as Texture2D;
+        selectedRoomNodeStyle.normal.textColor = Color.white;
+        selectedRoomNodeStyle.padding = new RectOffset(nodePadding, nodePadding, nodePadding, nodePadding);
+        selectedRoomNodeStyle.border = new RectOffset(nodeBorder, nodeBorder, nodeBorder, nodeBorder);
+
         // Load Room node types
         roomNodeTypeList = GameResources.Instance.roomNodeTypeList;
+    }
+
+    private void OnDisable()
+    {
+        // Selection changed event cleanup
+        Selection.selectionChanged -= OnSelectionChanged;
     }
 
     /// <summary>
@@ -189,10 +206,17 @@ public class RoomNodeGraphEditor : EditorWindow
     /// </summary>
     private void ProcessMouseDownEvent(Event thisEvent)
     {
-        // Process EMB click on graph event (show context menu)
+        // Process RMB click on graph event (show context menu)
         if (thisEvent.button == 1)
         {
             ShowContextMenu(thisEvent.mousePosition);
+        }
+
+        // Process LMB clck on graph event (clear line and all chosen room nodes)
+        if (thisEvent.button == 0)
+        {
+            ClearDraggedLine();
+            ClearAllSelectedRoomNodes();
         }
     }
 
@@ -246,6 +270,12 @@ public class RoomNodeGraphEditor : EditorWindow
     /// </summary>
     private void AddRoomNode(object mousePosObject)
     {
+        // Addreate entrance room node if there is no room node in the graph
+        if (currentRoomNodeGraph.roomNodeList.Count == 0)
+        {
+            AddRoomNode(new Vector2(100f, 200f), roomNodeTypeList.list.Find(x => x.isEntrance));
+        }
+
         AddRoomNode(mousePosObject, roomNodeTypeList.list.Find(x => x.isNone));
     }
 
@@ -275,6 +305,21 @@ public class RoomNodeGraphEditor : EditorWindow
     }
 
     /// <summary>
+    /// Clear selection from room nodes
+    /// </summary>
+    private void ClearAllSelectedRoomNodes()
+    {
+        foreach (RoomNodeSO roomNode in currentRoomNodeGraph.roomNodeList)
+        {
+            if (roomNode.isSelected)
+            {
+                roomNode.isSelected = false;
+                GUI.changed = true;
+            }
+        }
+    }
+
+    /// <summary>
     /// Draw room nodes in the graph window
     /// </summary>
     private void DrawRoomNodes()
@@ -282,7 +327,15 @@ public class RoomNodeGraphEditor : EditorWindow
         // Loop through all room nodes and draw themm
         foreach (RoomNodeSO roomNode in currentRoomNodeGraph.roomNodeList)
         {
-            roomNode.Draw(roomNodeStyle);
+            // if room node is selected use selected style
+            if (roomNode.isSelected)
+            {
+                roomNode.Draw(selectedRoomNodeStyle);
+            }
+            else
+            {
+                roomNode.Draw(roomNodeStyle);
+            }
         }
 
         GUI.changed = true;
@@ -353,6 +406,22 @@ public class RoomNodeGraphEditor : EditorWindow
                     }
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Selection changed event - update room node graph
+    /// </summary>
+    private void OnSelectionChanged()
+    {
+        // Get selected object
+        Object selectedObject = Selection.activeObject;
+
+        // If selected object is a room node graph then set it as current room node graph
+        if (selectedObject != null && selectedObject.GetType() == typeof(RoomNodeGraphSO))
+        {
+            currentRoomNodeGraph = (RoomNodeGraphSO)selectedObject;
+            GUI.changed = true;
         }
     }
 }
