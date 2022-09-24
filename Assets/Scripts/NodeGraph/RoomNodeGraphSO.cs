@@ -31,7 +31,7 @@ public class RoomNodeGraphSO : ScriptableObject
     /// <summary>
     ///  Get room node by id
     /// </summary>
-    public RoomNodeSO GetRoomNode(string id)
+    public RoomNodeSO GetRoomNodeFromID(string id)
     {
         if (roomNodeDictionary.ContainsKey(id))
         {
