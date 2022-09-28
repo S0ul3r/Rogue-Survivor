@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class RoomNodeGraphEditor : EditorWindow
 {
+    private readonly GUIStyles _styles = new GUIStyles();
     private GUIStyle roomNodeStyle;
     private GUIStyle selectedRoomNodeStyle;
     private static RoomNodeGraphSO currentRoomNodeGraph;
@@ -18,8 +20,6 @@ public class RoomNodeGraphEditor : EditorWindow
     // Layout for node variables
     private const float nodeWidth = 160f;
     private const float nodeHeight = 75f;
-    private const int nodePadding = 25; // Spacing inside the GUI element
-    private const int nodeBorder = 12; // Spacing outside the GUI element
 
     // Widths of lines
     private const float arrowLineWidth = 4f;
@@ -40,20 +40,9 @@ public class RoomNodeGraphEditor : EditorWindow
     {
         // Selection changed event
         Selection.selectionChanged += OnSelectionChanged;
-
-        // Layout style definition
-        roomNodeStyle = new GUIStyle();
-        roomNodeStyle.normal.background = EditorGUIUtility.Load("node1") as Texture2D;
-        roomNodeStyle.normal.textColor = Color.white;
-        roomNodeStyle.padding = new RectOffset(nodePadding, nodePadding, nodePadding, nodePadding);
-        roomNodeStyle.border = new RectOffset(nodeBorder, nodeBorder, nodeBorder, nodeBorder);
-
-        // Selected node style definition
-        selectedRoomNodeStyle = new GUIStyle();
-        selectedRoomNodeStyle.normal.background = EditorGUIUtility.Load("node1 on") as Texture2D;
-        selectedRoomNodeStyle.normal.textColor = Color.white;
-        selectedRoomNodeStyle.padding = new RectOffset(nodePadding, nodePadding, nodePadding, nodePadding);
-        selectedRoomNodeStyle.border = new RectOffset(nodeBorder, nodeBorder, nodeBorder, nodeBorder);
+        
+        // Styles for room nodes
+        _styles.Initialize();
 
         // Load Room node types
         roomNodeTypeList = GameResources.Instance.roomNodeTypeList;
@@ -164,12 +153,20 @@ public class RoomNodeGraphEditor : EditorWindow
         // Reset drag of graph
         graphDrag = Vector2.zero;
 
+        if (thisEvent.keyCode is KeyCode.Delete) RemoveSelectedRoomNodes();
+
+        if (thisEvent.shift && thisEvent.type is EventType.KeyDown)
+        {
+            if (thisEvent.keyCode is KeyCode.D)
+                DuplicateSelectedRoomNodes();
+        }
+
         // check if mouse is over a node, check before if it is null or is being dragged
         if (currentRoomNode == null || currentRoomNode.isLeftClickDragging == false)
         {
             currentRoomNode = CheckMouseOverNode(thisEvent);
         }
-        
+
         // if mouse isnt over a room node or is being dragged then execute Process Graph events
         if (currentRoomNode == null || currentRoomNodeGraph.roomNodeToDrawLineFrom != null) 
         {
@@ -331,6 +328,7 @@ public class RoomNodeGraphEditor : EditorWindow
         menuItem.AddItem(new GUIContent("Select All Room Nodes"), false, SelectAllRoomNodes);
         menuItem.AddSeparator("");
         menuItem.AddItem(new GUIContent("Remove Selected Room Nodes"), false, RemoveSelectedRoomNodes);
+        menuItem.AddSeparator("");
         menuItem.AddItem(new GUIContent("Remove Selected Connections"), false, RemoveSelectedConnections);
 
         menuItem.ShowAsContext();
@@ -373,6 +371,16 @@ public class RoomNodeGraphEditor : EditorWindow
         
         // Refresh room node graph dict
         currentRoomNodeGraph.OnValidate();
+    }
+
+    private void DuplicateSelectedRoomNodes()
+    {
+        var selectedRoomNodeList = currentRoomNodeGraph.roomNodeList.FindAll(node => node.isSelected);
+
+        foreach (var roomNode in selectedRoomNodeList.Where(roomNode => !roomNode.roomNodeType.isEntrance))
+        {
+            AddRoomNode(roomNode.rect.position + new Vector2(0, 100), roomNode.roomNodeType);
+        }
     }
 
     /// <summary>
@@ -494,23 +502,35 @@ public class RoomNodeGraphEditor : EditorWindow
     /// <summary>
     /// Draw room nodes in the graph window
     /// </summary>
+    /// Draw room nodes in the graph editor window
     private void DrawRoomNodes()
     {
-        // Loop through all room nodes and draw themm
-        foreach (RoomNodeSO roomNode in currentRoomNodeGraph.roomNodeList)
+        foreach (var roomNode in currentRoomNodeGraph.roomNodeList)
         {
-            // if room node is selected use selected style
-            if (roomNode.isSelected)
-            {
-                roomNode.Draw(selectedRoomNodeStyle);
-            }
-            else
-            {
-                roomNode.Draw(roomNodeStyle);
-            }
+            roomNode.Draw(GetRoomNodeStyle(roomNode));
         }
-
         GUI.changed = true;
+    }
+
+    private GUIStyle GetRoomNodeStyle(RoomNodeSO roomNode)
+    {
+        if (roomNode.roomNodeType.isEntrance)
+        {
+            return roomNode.isSelected ? _styles.entranceNodeSelectedStyle : _styles.entranceNodeStyle;
+        }
+        if (roomNode.roomNodeType.isCorridor)
+        {
+            return roomNode.isSelected ? _styles.corridorNodeSelectedStyle : _styles.corridorNodeStyle;
+        }
+        if (roomNode.roomNodeType.isBossRoom)
+        {
+            return roomNode.isSelected ? _styles.bossRoomNodeSelectedStyle : _styles.bossRoomNodeStyle;
+        }
+        if (roomNode.roomNodeType.isChestRoom)
+        {
+            return roomNode.isSelected ? _styles.chestRoomNodeSelectedStyle : _styles.chestRoomNodeStyle;
+        }
+        return roomNode.isSelected ? _styles.roomNodeSelectedStyle : _styles.roomNodeStyle;
     }
 
     /// <summary>

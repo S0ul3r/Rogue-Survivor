@@ -12,6 +12,10 @@ public class RoomNodeTypeSO : ScriptableObject
     #endregion Header
     public bool displayInNodeGraphEditor = true;
     #region Header
+    [Header("Czy jest pokojem ze skrzynia")]
+    #endregion Header
+    public bool isChestRoom;
+    #region Header
     [Header("Czy jest korytarzem")]
     #endregion Header
     public bool isCorridor;

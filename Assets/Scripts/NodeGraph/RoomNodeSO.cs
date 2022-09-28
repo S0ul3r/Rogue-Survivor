@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,10 +13,17 @@ public class RoomNodeSO : ScriptableObject
     public RoomNodeTypeSO roomNodeType;
     [HideInInspector] public RoomNodeTypeListSO roomNodeTypeList;
 
+    // Node layout values
+    private const float RoomNodeWidth = 160f;
+    private const float RoomNodeHeight = 75f;
+    
+    private const float CorridorNodeWidth = 120f;
+    private const float CorridorNodeHeight = 75f;
+
     #region Editor Code
 
 #if UNITY_EDITOR
-
+    [HideInInspector] public GUIStyle style;
     [HideInInspector] public Rect rect;
     [HideInInspector] public bool isLeftClickDragging = false;
     [HideInInspector] public bool isSelected = false;
@@ -41,11 +49,32 @@ public class RoomNodeSO : ScriptableObject
     /// </summary>
     public void Draw(GUIStyle nodeStyle)
     {
+        style = nodeStyle;
         //  Draw Node Box Using Begin Area
         GUILayout.BeginArea(rect, nodeStyle);
 
         // Start change for popup window
         EditorGUI.BeginChangeCheck();
+
+        // Color nodes depending which node they are
+        if (roomNodeType.isCorridor)
+        {
+            rect.width = CorridorNodeWidth;
+            rect.height = CorridorNodeHeight;
+            GUI.contentColor = Color.white;
+        }
+        else if (roomNodeType.isChestRoom)
+        {
+            rect.width = RoomNodeWidth;
+            rect.height = RoomNodeHeight;
+            GUI.contentColor = Color.black;
+        }
+        else
+        {
+            rect.width = RoomNodeWidth;
+            rect.height = RoomNodeHeight;
+            GUI.contentColor = Color.white;
+        }
 
         // Check if room node has a parent node or is Entrance node type then display label else display popup
         if (parentRoomNodeIDList.Count > 0 || roomNodeType.isEntrance)
@@ -143,7 +172,7 @@ public class RoomNodeSO : ScriptableObject
         // LMB
         if (thisEvent.button == 0)
         {
-            ProcessLeftClickDownEvent();
+            ProcessLeftClickDownEvent(thisEvent);
         }
 
         // RMB
@@ -156,16 +185,21 @@ public class RoomNodeSO : ScriptableObject
     /// <summary>
     /// For left click down event
     /// </summary> 
-    private void ProcessLeftClickDownEvent()
+    private void ProcessLeftClickDownEvent(Event thisEvent)
     {
         Selection.activeObject = this;
         
-        if (isSelected) 
+        // If shift or ctrl is held down, add to the selection
+        if (thisEvent.shift || thisEvent.control)
         {
-            isSelected = false;
+            isSelected = !isSelected;
         }
         else
         {
+            // Select the node  and deselect all other nodes
+            foreach (var roomNode in roomNodeGraph.roomNodeList.Where(
+                            roomNode => roomNode != this && roomNode.isSelected))
+                roomNode.isSelected = false;
             isSelected = true;
         }
     }
