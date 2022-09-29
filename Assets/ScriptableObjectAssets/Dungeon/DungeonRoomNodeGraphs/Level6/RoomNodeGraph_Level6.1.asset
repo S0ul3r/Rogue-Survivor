@@ -300,17 +300,18 @@ MonoBehaviour:
   m_Name: RoomNode
   m_EditorClassIdentifier: 
   id: 6671ddc6-d502-40bf-b86c-a8fc55a4b5dd
-  parentRoomNodeIDList: []
+  parentRoomNodeIDList:
+  - ab991e99-cfa5-4c08-95a6-e143dd94409b
   childRoomNodeIDList: []
   roomNodeGraph: {fileID: 11400000}
-  roomNodeType: {fileID: 11400000, guid: 3f46b5f4c2b9b3f4bb86e72ae18e2ca1, type: 2}
+  roomNodeType: {fileID: 11400000, guid: 3262b23e815cd4949b0e6d20b7ff5935, type: 2}
   roomNodeTypeList: {fileID: 11400000, guid: 3f572f9faabcd334f8fe9dbe91dacb9b, type: 2}
   style:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 0}
+      m_Background: {fileID: -3453378117783705200, guid: 0000000000000000d000000000000000, type: 0}
       m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
       m_ScaledBackgrounds: []
@@ -340,20 +341,20 @@ MonoBehaviour:
       m_ScaledBackgrounds: []
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
+      m_Left: 12
+      m_Right: 12
+      m_Top: 12
+      m_Bottom: 12
     m_Margin:
       m_Left: 0
       m_Right: 0
       m_Top: 0
       m_Bottom: 0
     m_Padding:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
+      m_Left: 20
+      m_Right: 20
+      m_Top: 20
+      m_Bottom: 20
     m_Overflow:
       m_Left: 0
       m_Right: 0
@@ -774,7 +775,8 @@ MonoBehaviour:
   id: ad95ea7b-f627-4753-8c5c-c652c7efe175
   parentRoomNodeIDList:
   - 1c39488d-2f03-4af9-8cc1-d7fc2e086957
-  childRoomNodeIDList: []
+  childRoomNodeIDList:
+  - ab991e99-cfa5-4c08-95a6-e143dd94409b
   roomNodeGraph: {fileID: 11400000}
   roomNodeType: {fileID: 11400000, guid: 977ebd963d142ac4784568fa9711180a, type: 2}
   roomNodeTypeList: {fileID: 11400000, guid: 3f572f9faabcd334f8fe9dbe91dacb9b, type: 2}
@@ -3103,8 +3105,10 @@ MonoBehaviour:
   m_Name: RoomNode
   m_EditorClassIdentifier: 
   id: ab991e99-cfa5-4c08-95a6-e143dd94409b
-  parentRoomNodeIDList: []
-  childRoomNodeIDList: []
+  parentRoomNodeIDList:
+  - ad95ea7b-f627-4753-8c5c-c652c7efe175
+  childRoomNodeIDList:
+  - 6671ddc6-d502-40bf-b86c-a8fc55a4b5dd
   roomNodeGraph: {fileID: 11400000}
   roomNodeType: {fileID: 11400000, guid: f4e198bbe7f301c4786b0a783e94568c, type: 2}
   roomNodeTypeList: {fileID: 11400000, guid: 3f572f9faabcd334f8fe9dbe91dacb9b, type: 2}
@@ -3177,8 +3181,8 @@ MonoBehaviour:
     m_StretchHeight: 0
   rect:
     serializedVersion: 2
-    x: 592
-    y: 345
+    x: 620
+    y: 285
     width: 120
     height: 75
   isLeftClickDragging: 0
