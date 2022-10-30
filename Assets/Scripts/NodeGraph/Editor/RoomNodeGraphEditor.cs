@@ -7,8 +7,6 @@ using UnityEngine;
 public class RoomNodeGraphEditor : EditorWindow
 {
     private readonly GUIStyles _styles = new GUIStyles();
-    private GUIStyle roomNodeStyle;
-    private GUIStyle selectedRoomNodeStyle;
     private static RoomNodeGraphSO currentRoomNodeGraph;
     
     private Vector2 graphOffset;
@@ -339,7 +337,7 @@ public class RoomNodeGraphEditor : EditorWindow
     /// </summary>
     private void AddRoomNode(object mousePosObject)
     {
-        // Addreate entrance room node if there is no room node in the graph
+        // Add entrance room node if there is no room node in the graph
         if (currentRoomNodeGraph.roomNodeList.Count == 0)
         {
             AddRoomNode(new Vector2(100f, 200f), roomNodeTypeList.list.Find(x => x.isEntrance));

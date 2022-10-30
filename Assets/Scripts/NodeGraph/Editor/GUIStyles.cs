@@ -33,13 +33,13 @@ public class GUIStyles
         void SetupEntranceNodeStyle()
         {
             entranceNodeStyle = new GUIStyle();
-            entranceNodeStyle.normal.background = EditorGUIUtility.Load("node3") as Texture2D;
+            entranceNodeStyle.normal.background = EditorGUIUtility.Load("node2") as Texture2D;
             entranceNodeStyle.normal.textColor = Color.white;
             entranceNodeStyle.padding = new RectOffset(NodePadding, NodePadding, NodePadding, NodePadding);
             entranceNodeStyle.border = new RectOffset(NodeBorder, NodeBorder, NodeBorder, NodeBorder);
 
             entranceNodeSelectedStyle = new GUIStyle();
-            entranceNodeSelectedStyle.normal.background = EditorGUIUtility.Load("node3 on") as Texture2D;
+            entranceNodeSelectedStyle.normal.background = EditorGUIUtility.Load("node2 on") as Texture2D;
             entranceNodeSelectedStyle.normal.textColor = Color.white;
             entranceNodeSelectedStyle.padding = entranceNodeStyle.padding;
             entranceNodeSelectedStyle.border = entranceNodeStyle.border;
@@ -48,13 +48,13 @@ public class GUIStyles
         void SetupRoomNodeStyle()
         {
             roomNodeStyle = new GUIStyle();
-            roomNodeStyle.normal.background = EditorGUIUtility.Load("node1") as Texture2D;
+            roomNodeStyle.normal.background = EditorGUIUtility.Load("node5") as Texture2D;
             roomNodeStyle.normal.textColor = Color.white;
             roomNodeStyle.padding = new RectOffset(NodePadding, NodePadding, NodePadding, NodePadding);
             roomNodeStyle.border = new RectOffset(NodeBorder, NodeBorder, NodeBorder, NodeBorder);
 
             roomNodeSelectedStyle = new GUIStyle();
-            roomNodeSelectedStyle.normal.background = EditorGUIUtility.Load("node1 on") as Texture2D;
+            roomNodeSelectedStyle.normal.background = EditorGUIUtility.Load("node5 on") as Texture2D;
             roomNodeSelectedStyle.normal.textColor = Color.white;
             roomNodeSelectedStyle.padding = roomNodeStyle.padding;
             roomNodeSelectedStyle.border = roomNodeStyle.border;
