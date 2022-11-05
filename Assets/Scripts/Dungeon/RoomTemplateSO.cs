@@ -1,90 +1,107 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Room Template", menuName = "Scriptable Objects/Dungeon/Room Template")]
+[CreateAssetMenu(fileName = "Room_", menuName = "Scriptable Objects/Dungeon/Room")]
 public class RoomTemplateSO : ScriptableObject
 {
     [HideInInspector] public string guid;
 
     #region Header ROOM PREFAB
+
     [Space(10)]
     [Header("ROOM PREFAB")]
+
     #endregion Header ROOM PREFAB
 
     #region Tooltip
-    [Tooltip("The prefab of the room (contains all the tilemaps for the room and enviroment")]
+
+    [Tooltip("The gameobject prefab for the room (this will contain all the tilemaps for the room and environment game objects")]
+
     #endregion Tooltip
 
-    public GameObject roomPrefab;
+    public GameObject prefab;
 
-    [HideInInspector] public GameObject previousRoomPrefab; // recreate guid when SO is copied and prefab changed
+    [HideInInspector] public GameObject previousPrefab; // this is used to regenerate the guid if the so is copied and the prefab is changed
 
-    #region Header ROOM CONFIG
+
+    #region Header ROOM CONFIGURATION
+
     [Space(10)]
-    [Header("ROOM CONFIG")]
-    #endregion Header ROOM CONFIG
+    [Header("ROOM CONFIGURATION")]
+
+    #endregion Header ROOM CONFIGURATION
 
     #region Tooltip
-    [Tooltip("The room node type SO. Types are similiar to those from room node graph. Exception: in room node grpah we onyl hhave COrridors, in templates we have corridors NS and EW")]
+
+    [Tooltip("The room node type SO. The room node types correspond to the room nodes used in the room node graph.  The exceptions being with corridors.  In the room node graph there is just one corridor type 'Corridor'.  For the room templates there are 2 corridor node types - CorridorNS and CorridorEW.")]
+
     #endregion Tooltip
 
     public RoomNodeTypeSO roomNodeType;
 
     #region Tooltip
-    [Tooltip("Rectangle with whole room inside, bottom left corner is a lower bound. Determined from tilemap of the room (this is local tilemap pos not world pos)")]
+
+    [Tooltip("If you imagine a rectangle around the room tilemap that just completely encloses it, the room lower bounds represent the bottom left corner of that rectangle. This should be determined from the tilemap for the room (using the coordinate brush pointer to get the tilemap grid position for that bottom left corner (Note: this is the local tilemap position and NOT world position")]
+
     #endregion Tooltip
 
     public Vector2Int lowerBounds;
 
     #region Tooltip
-    [Tooltip("Rectangle with whole room inside, top right corner is a lower bound. Determined from tilemap of the room (this is local tilemap pos not world pos)")]
-    #endregion
+
+    [Tooltip("If you imagine a rectangle around the room tilemap that just completely encloses it, the room upper bounds represent the top right corner of that rectangle. This should be determined from the tilemap for the room (using the coordinate brush pointer to get the tilemap grid position for that top right corner (Note: this is the local tilemap position and NOT world position")]
+
+    #endregion Tooltip
 
     public Vector2Int upperBounds;
 
     #region Tooltip
-    [Tooltip("Max 4 doors for a room - each for every side of the room. each doorway is 3 tiles wide, with middle one being a coordinate pos")]
+
+    [Tooltip("There should be a maximum of four doorways for a room - one for each compass direction.  These should have a consistent 3 tile opening size, with the middle tile position being the doorway coordinate 'position'")]
+
     #endregion Tooltip
 
     [SerializeField] public List<Doorway> doorwayList;
 
     #region Tooltip
-    [Tooltip("Every possible spawn positions for every object in the game will be in this array")]
-    #endregion
+
+    [Tooltip("Each possible spawn position (used for enemies and chests) for the room in tilemap coordinates should be added to this array")]
+
+    #endregion Tooltip
 
     public Vector2Int[] spawnPositionArray;
 
     /// <summary>
-    /// Return list of Entrances to the room
+    /// Returns the list of Entrances for the room template
     /// </summary>
     public List<Doorway> GetDoorwayList()
     {
         return doorwayList;
     }
 
-    #region Validate
+    #region Validation
 
 #if UNITY_EDITOR
 
-    // Validate fields
+    // Validate SO fields
     private void OnValidate()
     {
-        // set unique GUID if empty or when prefab changed
-        if(guid == "" || previousRoomPrefab != roomPrefab)
+        // Set unique GUID if empty or the prefab changes
+        if (guid == "" || previousPrefab != prefab)
         {
             guid = GUID.Generate().ToString();
-            previousRoomPrefab = roomPrefab;
+            previousPrefab = prefab;
             EditorUtility.SetDirty(this);
         }
 
         HelperUtilities.ValidateCheckEnumerableValues(this, nameof(doorwayList), doorwayList);
 
-        // Check if spawns pos are populated
+        // Check spawn positions populated
         HelperUtilities.ValidateCheckEnumerableValues(this, nameof(spawnPositionArray), spawnPositionArray);
     }
 
 #endif
 
-    #endregion Validate
+    #endregion Validation
 }
