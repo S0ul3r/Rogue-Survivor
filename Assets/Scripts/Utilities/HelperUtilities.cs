@@ -24,6 +24,13 @@ public static class HelperUtilities
     {
         bool error = false;
         int count = 0;
+        
+        if (enumerableChecktoObject == null)
+        {
+            Debug.Log(fieldName + " is null" + thisObject.name.ToString());
+            return true;
+        }
+
         foreach (var item in enumerableChecktoObject)
         {
             // Check for null
