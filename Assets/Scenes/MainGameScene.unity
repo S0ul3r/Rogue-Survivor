@@ -123,6 +123,58 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &478762998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 478763000}
+  - component: {fileID: 478762999}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &478762999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478762998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15d0c9e8a66639e4cbc6a0ede3ca02a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dungeonLevelList:
+  - {fileID: 11400000, guid: 2895934cf9225ec4e86b5ae25357c71a, type: 2}
+  - {fileID: 11400000, guid: 11a743cd52f3cd24b988bc06be4e7138, type: 2}
+  - {fileID: 11400000, guid: 393699d92a72a934794af7e96bfa499f, type: 2}
+  - {fileID: 11400000, guid: 0f38e69b7ad2cd94db431e10e36f360e, type: 2}
+  - {fileID: 11400000, guid: 5a6b59d4e646d08408c8bf496b5eefa2, type: 2}
+  - {fileID: 11400000, guid: 605f28e632bb2f94caba0786de14c9bc, type: 2}
+  currentLevelListIndex: 0
+  gameState: 0
+--- !u!4 &478763000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478762998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.8532176, y: 4.266297, z: -2.7252421}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &699357107
 GameObject:
   m_ObjectHideFlags: 0
