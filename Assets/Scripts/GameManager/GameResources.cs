@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameResources : MonoBehaviour
@@ -21,7 +23,7 @@ public class GameResources : MonoBehaviour
     [Header("DUNGEON")]
     #endregion
     #region Tooltip
-    [Tooltip("Zapelnij uzywajac RoomNodeTypeListSO")]
+    [Tooltip("Populate with the dungeon RoomNodeTypeListSO")]
     #endregion
 
     public RoomNodeTypeListSO roomNodeTypeList;
@@ -34,4 +36,5 @@ public class GameResources : MonoBehaviour
     [Tooltip("Dimmed Material")]
     #endregion
     public Material dimmedMaterial;
+
 }

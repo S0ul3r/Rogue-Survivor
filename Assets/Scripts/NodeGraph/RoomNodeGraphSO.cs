@@ -39,7 +39,6 @@ public class RoomNodeGraphSO : ScriptableObject
                 return node;
             }
         }
-
         return null;
     }
 
@@ -48,15 +47,12 @@ public class RoomNodeGraphSO : ScriptableObject
     /// </summary>
     public RoomNodeSO GetRoomNodeFromID(string id)
     {
-        if (roomNodeDictionary.ContainsKey(id))
+        if (roomNodeDictionary.TryGetValue(id, out RoomNodeSO roomNode))
         {
-            return roomNodeDictionary[id];
+            return roomNode;
         }
-        else
-        {
-            Debug.LogError("RoomNodeDictionary does not contain key: " + id);
-            return null;
-        }
+        Debug.LogError("RoomNodeDictionary does not contain key: " + id);
+        return null;
     }
 
     /// <summary>

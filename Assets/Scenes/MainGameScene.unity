@@ -123,6 +123,49 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &247553898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247553900}
+  - component: {fileID: 247553899}
+  m_Layer: 0
+  m_Name: dungBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &247553899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247553898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b567165aa6768cd449ef8bd8566e4b27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &247553900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247553898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &478762998
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +202,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0f38e69b7ad2cd94db431e10e36f360e, type: 2}
   - {fileID: 11400000, guid: 5a6b59d4e646d08408c8bf496b5eefa2, type: 2}
   - {fileID: 11400000, guid: 605f28e632bb2f94caba0786de14c9bc, type: 2}
-  currentLevelListIndex: 0
+  currentLevelListIndex: 5
   gameState: 0
 --- !u!4 &478763000
 Transform:
