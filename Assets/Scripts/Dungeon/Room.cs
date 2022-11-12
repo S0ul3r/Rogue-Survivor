@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ public class Room
     public bool isLit = false;
     public bool isClearOfEnemies = false;
     public bool isAlreadyVisited = false;
-    
+
     // room constructor
     public Room()
     {

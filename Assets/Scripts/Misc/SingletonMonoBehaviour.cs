@@ -11,7 +11,7 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
             return _instance;
         }
     }
-    
+
     // allow other classes to incherit Awake() and make is possible to overwrite it
     protected virtual void Awake()
     {

@@ -8,7 +8,7 @@ public class RoomNodeGraphEditor : EditorWindow
 {
     private readonly GUIStyles _styles = new GUIStyles();
     private static RoomNodeGraphSO currentRoomNodeGraph;
-    
+
     private Vector2 graphOffset;
     private Vector2 graphDrag;
 
@@ -38,7 +38,7 @@ public class RoomNodeGraphEditor : EditorWindow
     {
         // Selection changed event
         Selection.selectionChanged += OnSelectionChanged;
-        
+
         // Styles for room nodes
         _styles.Initialize();
 
@@ -88,7 +88,7 @@ public class RoomNodeGraphEditor : EditorWindow
 
             // Draw draged line
             DrawDraggedLine();
-            
+
             // Process Events
             ProcessEvents(Event.current);
 
@@ -166,7 +166,7 @@ public class RoomNodeGraphEditor : EditorWindow
         }
 
         // if mouse isnt over a room node or is being dragged then execute Process Graph events
-        if (currentRoomNode == null || currentRoomNodeGraph.roomNodeToDrawLineFrom != null) 
+        if (currentRoomNode == null || currentRoomNodeGraph.roomNodeToDrawLineFrom != null)
         {
             ProcessRoomNodeGraphEvents(thisEvent);
         }
@@ -270,7 +270,7 @@ public class RoomNodeGraphEditor : EditorWindow
         {
             ProcessLeftMouseDragEvent(thisEvent.delta);
         }
-        
+
         // Process RMB drag event - drow line
         if (thisEvent.button == 1)
         {
@@ -284,7 +284,7 @@ public class RoomNodeGraphEditor : EditorWindow
     private void ProcessLeftMouseDragEvent(Vector2 delta)
     {
         graphDrag = delta;
-        
+
         for (int i = 0; i < currentRoomNodeGraph.roomNodeList.Count; i++)
         {
             currentRoomNodeGraph.roomNodeList[i].DragNode(delta);
@@ -305,7 +305,7 @@ public class RoomNodeGraphEditor : EditorWindow
             GUI.changed = true;
         }
     }
-    
+
     /// <summary>
     /// Updating line pos for drag from room node
     /// </summary>
@@ -366,7 +366,7 @@ public class RoomNodeGraphEditor : EditorWindow
         AssetDatabase.AddObjectToAsset(roomNode, currentRoomNodeGraph);
 
         AssetDatabase.SaveAssets();
-        
+
         // Refresh room node graph dict
         currentRoomNodeGraph.OnValidate();
     }
@@ -535,7 +535,7 @@ public class RoomNodeGraphEditor : EditorWindow
     /// Drawing lines between parent and child room nodes
     /// </summary>
     private void DrawNodeLine(RoomNodeSO parentRoomNode, RoomNodeSO childRoomNode, Color color)
-    {        
+    {
         // Get positions
         Vector2 startPos = parentRoomNode.rect.center;
         Vector2 endPos = childRoomNode.rect.center;
@@ -552,7 +552,7 @@ public class RoomNodeGraphEditor : EditorWindow
 
         // Calculate mid point of arrow head
         Vector2 arrowHeadPos = middlePos + direction * lineArrowSize;
-        
+
         // Draw arrow
         Handles.DrawBezier(arrowHeadPos, perpendicularDirection1, arrowHeadPos, perpendicularDirection1, color, null, lineArrowSize);
         Handles.DrawBezier(arrowHeadPos, perpendicularDirection2, arrowHeadPos, perpendicularDirection2, color, null, lineArrowSize);
@@ -588,7 +588,7 @@ public class RoomNodeGraphEditor : EditorWindow
                 {
                     // Get child room node
                     RoomNodeSO childRoomNode = currentRoomNodeGraph.roomNodeDictionary[childID];
-                    
+
                     if (childRoomNode != null)
                     {
                         DrawNodeLine(roomNode, childRoomNode, Color.magenta);

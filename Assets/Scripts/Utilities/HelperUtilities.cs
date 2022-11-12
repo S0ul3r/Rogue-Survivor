@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class HelperUtilities
@@ -24,7 +23,7 @@ public static class HelperUtilities
     {
         bool error = false;
         int count = 0;
-        
+
         if (enumerableChecktoObject == null)
         {
             Debug.Log(fieldName + " is null" + thisObject.name.ToString());

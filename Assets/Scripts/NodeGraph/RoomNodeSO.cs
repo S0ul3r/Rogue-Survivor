@@ -16,7 +16,7 @@ public class RoomNodeSO : ScriptableObject
     // Node layout values
     private const float RoomNodeWidth = 160f;
     private const float RoomNodeHeight = 75f;
-    
+
     private const float CorridorNodeWidth = 120f;
     private const float CorridorNodeHeight = 75f;
 
@@ -91,8 +91,8 @@ public class RoomNodeSO : ScriptableObject
             roomNodeType = roomNodeTypeList.list[selection];
 
             // If selection for room type has changed and some child connection can be invalid
-            if (roomNodeTypeList.list[selected].isCorridor && !roomNodeTypeList.list[selection].isCorridor || 
-                !roomNodeTypeList.list[selected].isCorridor && roomNodeTypeList.list[selection].isCorridor || 
+            if (roomNodeTypeList.list[selected].isCorridor && !roomNodeTypeList.list[selection].isCorridor ||
+                !roomNodeTypeList.list[selected].isCorridor && roomNodeTypeList.list[selection].isCorridor ||
                 !roomNodeTypeList.list[selected].isBossRoom && roomNodeTypeList.list[selection].isBossRoom)
             {
                 // check if it is selected and has children
@@ -188,7 +188,7 @@ public class RoomNodeSO : ScriptableObject
     private void ProcessLeftClickDownEvent(Event thisEvent)
     {
         Selection.activeObject = this;
-        
+
         // If shift or ctrl is held down, add to the selection
         if (thisEvent.shift || thisEvent.control)
         {
@@ -226,7 +226,8 @@ public class RoomNodeSO : ScriptableObject
     /// <summary>
     /// For left click up event
     /// </summary>
-    private void ProcessLeftClickUpEvent() {
+    private void ProcessLeftClickUpEvent()
+    {
         if (isLeftClickDragging)
         {
             isLeftClickDragging = false;
@@ -250,7 +251,7 @@ public class RoomNodeSO : ScriptableObject
     private void ProcessLeftMouseDragEvent(Event thisEvent)
     {
         isLeftClickDragging = true;
-        
+
         DragNode(thisEvent.delta);
         GUI.changed = true;
     }
@@ -369,11 +370,11 @@ public class RoomNodeSO : ScriptableObject
         // When adding child node room to corridor check if that corridor doesnt have any other child rooms
         if (childRoomNodeIDList.Count > 0 && !roomNodeGraph.GetRoomNodeFromID(childID).roomNodeType.isCorridor)
             return false;
-        
+
         // When a child node is a corridor it cannot have more than max child corridors
         if (roomNodeGraph.GetRoomNodeFromID(childID).roomNodeType.isCorridor && childRoomNodeIDList.Count >= Settings.maxChildCorridors)
             return false;
-        
+
         return true;
     }
 

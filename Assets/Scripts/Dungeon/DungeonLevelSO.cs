@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -56,13 +55,13 @@ public class DungeonLevelSO : ScriptableObject
         {
             if (roomTemplateSO == null)
                 return;
-            
+
             if (roomTemplateSO.roomNodeType.isCorridorEW)
                 isEWCorridor = true;
-            
+
             if (roomTemplateSO.roomNodeType.isCorridorNS)
                 isNSCorridor = true;
-            
+
             if (roomTemplateSO.roomNodeType.isEntrance)
                 isEntrance = true;
         }

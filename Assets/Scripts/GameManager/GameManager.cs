@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -85,7 +84,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     /// </summary>
     private void PlayDungeonLevel(int currentLevelListIndex)
     {
+        // build dung level
+        bool dungeonBuiltComplete = DungeonBuilder.Instance.GenerateDungeon(dungeonLevelList[currentLevelListIndex]);
 
+        if (!dungeonBuiltComplete)
+        {
+            Debug.LogError("Dungeon level not built correctly, check spcified rooms and node graphs");
+        }
     }
 
     /// <summary>

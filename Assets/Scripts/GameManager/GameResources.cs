@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameResources : MonoBehaviour
@@ -27,4 +25,13 @@ public class GameResources : MonoBehaviour
     #endregion
 
     public RoomNodeTypeListSO roomNodeTypeList;
+
+    #region Header MATERIALS
+    [Space(10)]
+    [Header("MATERIALS")]
+    #endregion
+    #region Tooltip
+    [Tooltip("Dimmed Material")]
+    #endregion
+    public Material dimmedMaterial;
 }

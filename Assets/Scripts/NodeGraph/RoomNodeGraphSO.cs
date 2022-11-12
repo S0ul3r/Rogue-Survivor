@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,6 +28,22 @@ public class RoomNodeGraphSO : ScriptableObject
     }
 
     /// <summary>
+    /// Get room node by roomNodeType
+    /// </summary>
+    public RoomNodeSO GetRoomNodeByType(RoomNodeTypeSO roomNodeType)
+    {
+        foreach (RoomNodeSO node in roomNodeList)
+        {
+            if (node.roomNodeType == roomNodeType)
+            {
+                return node;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
     ///  Get room node by id
     /// </summary>
     public RoomNodeSO GetRoomNodeFromID(string id)
@@ -41,6 +56,17 @@ public class RoomNodeGraphSO : ScriptableObject
         {
             Debug.LogError("RoomNodeDictionary does not contain key: " + id);
             return null;
+        }
+    }
+
+    /// <summary>
+    ///  Get child room node for given parent room node
+    /// </summary>
+    public IEnumerable<RoomNodeSO> GetChildRoomNodes(RoomNodeSO parentRoomNode)
+    {
+        foreach (string childNodeID in parentRoomNode.childRoomNodeIDList)
+        {
+            yield return GetRoomNodeFromID(childNodeID);
         }
     }
 
