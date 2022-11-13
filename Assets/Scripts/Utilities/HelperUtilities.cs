@@ -17,6 +17,19 @@ public static class HelperUtilities
     }
 
     /// <summary>
+    /// Check for null values
+    /// </summary>
+    public static bool ValidateCheckNull(Object thisObject, string fieldName, Object objectToCheck)
+    {
+        if (objectToCheck == null)
+        {
+            Debug.LogError(thisObject.name.ToString() + ": " + fieldName + " is null and must contain a value to be used.");
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
     /// Check for empty list or contain null value check - returns error = true if empty or contains null
     /// </summary> 
     public static bool ValidateCheckEnumerableValues(Object thisObject, string fieldName, IEnumerable enumerableChecktoObject)
@@ -49,6 +62,28 @@ public static class HelperUtilities
         {
             error = true;
             Debug.LogError(thisObject.name.ToString() + ": " + fieldName + " is empty and must contain a value to be used.");
+        }
+
+        return error;
+    }
+
+    /// <summary>
+    /// check for positive values - returns error = true if negative, isZeroAllowed and param
+    /// </summary>
+    public static bool ValidateCheckPositiveValue(Object thisObject, string fieldName, int valueToCheck, bool isZeroAllowed)
+    {
+        bool error = false;
+        
+        if (isZeroAllowed && valueToCheck < 0)
+        {
+            error = true;
+            Debug.LogError(thisObject.name.ToString() + ": " + fieldName + " is negative and must be positive or zero.");
+        }
+
+        if (!isZeroAllowed && valueToCheck <= 0)
+        {
+            error = true;
+            Debug.LogError(thisObject.name.ToString() + ": " + fieldName + " is zero or negative and must be greater than zero.");
         }
 
         return error;

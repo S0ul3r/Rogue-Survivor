@@ -28,6 +28,15 @@ public class GameResources : MonoBehaviour
 
     public RoomNodeTypeListSO roomNodeTypeList;
 
+    #region Header PLAYER
+    [Space(10)]
+    [Header("PLAYER")]
+    #endregion
+    #region Tooltip
+    [Tooltip("Populate with the current player CurrentPlayerSO, reference to player details PlayerDetailsSO")]
+    #endregion
+    public CurrentPlayerSO currentPlayer;
+
     #region Header MATERIALS
     [Space(10)]
     [Header("MATERIALS")]
