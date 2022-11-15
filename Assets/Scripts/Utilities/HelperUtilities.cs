@@ -88,4 +88,33 @@ public static class HelperUtilities
 
         return error;
     }
+
+    /// <summary>
+    /// Get neares spawn point form position
+    /// </summary>
+    public static Vector3 GetNearestSpawnPoint(Vector3 playerPos)
+    {
+        Room currRoom = GameManager.Instance.GetCurrentRoom();
+
+        // get nearest spawn point to player
+        Grid grid = currRoom.instantiatedRoom.grid;
+
+        // initialise vector3 variable with huge number
+        Vector3 nearestSpawnPoint = new Vector3(10000f, 10000f, 0f);
+
+        // loop through all spawn points
+        foreach (Vector2Int spawnPosGrid in currRoom.spawnPositionArray)
+        {
+            // get world position of spawn point
+            Vector3 spawnPosWorld = grid.CellToWorld((Vector3Int)spawnPosGrid);
+
+            // check if spawn point is closer than current nearest spawn point
+            if (Vector3.Distance(playerPos, spawnPosWorld) < Vector3.Distance(playerPos, nearestSpawnPoint))
+            {
+                nearestSpawnPoint = spawnPosWorld;
+            }
+        }
+
+        return nearestSpawnPoint;
+    }
 }

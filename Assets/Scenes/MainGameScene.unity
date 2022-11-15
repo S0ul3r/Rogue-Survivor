@@ -426,6 +426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1427984430}
   - component: {fileID: 1427984429}
+  - component: {fileID: 1427984431}
   m_Layer: 0
   m_Name: CinemachineTargetGroup
   m_TagString: Untagged
@@ -463,6 +464,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1427984431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427984428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f320ff2a0578f419dda64167228f96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetGroup: {fileID: 0}
+  target:
+    target: {fileID: 0}
+    weight: 0
+    radius: 0
 --- !u!1 &1462794232
 GameObject:
   m_ObjectHideFlags: 0

@@ -101,6 +101,22 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     path: HandNoWeapon
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: {x: 0.5625, y: 0.375, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0, y: 0.33333334, z: 0.33333334}
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    path: WeaponAnchorPos
   m_ScaleCurves: []
   m_FloatCurves:
   - curve:
@@ -200,17 +216,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -892881270494569320, guid: 788b52df224c1d14594c1176892c7ab3,
-        type: 3}
+      value: {fileID: -892881270494569320, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
     - time: 0.1
-      value: {fileID: -3633265428083532034, guid: 788b52df224c1d14594c1176892c7ab3,
-        type: 3}
+      value: {fileID: -3633265428083532034, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
     - time: 0.2
-      value: {fileID: -5392825556684313947, guid: 788b52df224c1d14594c1176892c7ab3,
-        type: 3}
+      value: {fileID: -5392825556684313947, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
     - time: 0.3
-      value: {fileID: -7318419392901577592, guid: 788b52df224c1d14594c1176892c7ab3,
-        type: 3}
+      value: {fileID: -7318419392901577592, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
     - time: 0.4
       value: {fileID: 8429929484429276, guid: 788b52df224c1d14594c1176892c7ab3, type: 3}
     attribute: m_Sprite
@@ -259,6 +271,13 @@ AnimationClip:
       typeID: 212
       customType: 23
       isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 4276638414
+      attribute: 1
+      script: {fileID: 0}
+      typeID: 4
+      customType: 0
+      isPPtrCurve: 0
     - serializedVersion: 2
       path: 0
       attribute: 4197328169
@@ -669,6 +688,63 @@ AnimationClip:
     attribute: m_Size.y
     path: 
     classID: 61
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.5625
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.x
+    path: WeaponAnchorPos
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.375
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.y
+    path: WeaponAnchorPos
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalPosition.z
+    path: WeaponAnchorPos
+    classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0

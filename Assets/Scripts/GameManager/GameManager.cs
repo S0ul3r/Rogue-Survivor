@@ -20,8 +20,34 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     #endregion Tooltip
 
     [SerializeField] private int currentLevelListIndex = 0;
+    private Room currRoom;
+    private Room prevRoom;
+    private PlayerDetailsSO playerDetails;
+    private Player player;
 
     [HideInInspector] public GameState gameState;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        // set player details saved in current plater SO
+        playerDetails = GameResources.Instance.currentPlayer.playerDetails;
+
+        // Instantiate player
+        InstantiatePlayer();
+    }
+
+    private void InstantiatePlayer()
+    {
+        // Instantiate player
+        GameObject playerGameObject = Instantiate(playerDetails.playerPrefab);
+
+        // Initialize player
+        player = playerGameObject.GetComponent<Player>();
+
+        player.InitializePlayer(playerDetails);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +106,24 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
 
     /// <summary>
+    /// Set current room player is in
+    /// </summary>
+    public void SetCurrentRoom(Room room)
+    {
+        prevRoom = currRoom;
+        currRoom = room;
+    }
+
+    /// <summary>
+    /// GetPlater
+    /// </summary>
+    public Player GetPlayer()
+    {
+        return player;
+    }
+
+
+    /// <summary>
     /// Play dungeon level for intro
     /// </summary>
     private void PlayDungeonLevel(int currentLevelListIndex)
@@ -91,6 +135,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             Debug.LogError("Dungeon level not built correctly, check spcified rooms and node graphs");
         }
+
+        // set player pos around middle of the room
+        player.gameObject.transform.position = new Vector3((currRoom.lowerBounds.x + currRoom.upperBounds.x) / 2f, (currRoom.lowerBounds.y + currRoom.upperBounds.y) / 2f, 0);
+
+        // get nearest spawn point to player
+        player.gameObject.transform.position = HelperUtilities.GetNearestSpawnPoint(player.gameObject.transform.position);
+    }
+
+    /// summary
+    /// Get current room player is in
+    /// </summary>
+    public Room GetCurrentRoom()
+    {
+        return currRoom;
     }
 
     /// <summary>

@@ -352,26 +352,58 @@ AnimationClip:
     path: 
     classID: 61
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Enabled
+    path: WeaponAnchorPos/WeaponRotationPoint/Weapon
+    classID: 60
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Enabled
+    path: WeaponAnchorPos/WeaponRotationPoint/Weapon
+    classID: 212
+    script: {fileID: 0}
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -3821844439352135264, guid: 9f85801b0af27ef4f8d15a54f15b2c8d,
-        type: 3}
+      value: {fileID: -3821844439352135264, guid: 9f85801b0af27ef4f8d15a54f15b2c8d, type: 3}
     - time: 0.07692308
-      value: {fileID: 7190452457150670605, guid: 9f85801b0af27ef4f8d15a54f15b2c8d,
-        type: 3}
+      value: {fileID: 7190452457150670605, guid: 9f85801b0af27ef4f8d15a54f15b2c8d, type: 3}
     - time: 0.15384616
-      value: {fileID: 1974755586638083894, guid: 9f85801b0af27ef4f8d15a54f15b2c8d,
-        type: 3}
+      value: {fileID: 1974755586638083894, guid: 9f85801b0af27ef4f8d15a54f15b2c8d, type: 3}
     - time: 0.23076923
-      value: {fileID: -2105693420547768211, guid: 9f85801b0af27ef4f8d15a54f15b2c8d,
-        type: 3}
+      value: {fileID: -2105693420547768211, guid: 9f85801b0af27ef4f8d15a54f15b2c8d, type: 3}
     - time: 0.30769232
-      value: {fileID: -1113934821498337301, guid: 9f85801b0af27ef4f8d15a54f15b2c8d,
-        type: 3}
+      value: {fileID: -1113934821498337301, guid: 9f85801b0af27ef4f8d15a54f15b2c8d, type: 3}
     - time: 0.3846154
-      value: {fileID: -366958316560917221, guid: 9f85801b0af27ef4f8d15a54f15b2c8d,
-        type: 3}
+      value: {fileID: -366958316560917221, guid: 9f85801b0af27ef4f8d15a54f15b2c8d, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -458,6 +490,20 @@ AnimationClip:
       attribute: 2368279999
       script: {fileID: 0}
       typeID: 61
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2276590918
+      attribute: 3305885265
+      script: {fileID: 0}
+      typeID: 60
+      customType: 0
+      isPPtrCurve: 0
+    - serializedVersion: 2
+      path: 2276590918
+      attribute: 3305885265
+      script: {fileID: 0}
+      typeID: 212
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
@@ -1150,6 +1196,44 @@ AnimationClip:
     attribute: m_Size.y
     path: 
     classID: 61
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Enabled
+    path: WeaponAnchorPos/WeaponRotationPoint/Weapon
+    classID: 60
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: Infinity
+        outSlope: Infinity
+        tangentMode: 103
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Enabled
+    path: WeaponAnchorPos/WeaponRotationPoint/Weapon
+    classID: 212
     script: {fileID: 0}
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
