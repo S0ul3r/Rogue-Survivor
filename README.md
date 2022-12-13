@@ -1,6 +1,8 @@
 # Rogue-Survivor
 
-2D Unity based rogue-like game havily inspired by "The Binding of Isaac"
+Project for thesis: "Gra 2D Roguelike z wykorzystaniem silnika Unity oraz języka C#"
+
+2D Unity based rogue-like game havily inspired by "The Binding of Isaac"\
 
 # LICENSE
 
