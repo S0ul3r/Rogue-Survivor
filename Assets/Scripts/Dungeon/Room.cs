@@ -6,7 +6,7 @@ public class Room
     public string id;
     public string templateID;
     public GameObject prefab;
-    public RoomNodeTypeSO roomNodeType;
+    public RoomBlockTypeSO roomNodeType;
     // coords of the room in the grid
     public Vector2Int lowerBounds;
     public Vector2Int upperBounds;

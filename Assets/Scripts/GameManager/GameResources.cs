@@ -23,10 +23,10 @@ public class GameResources : MonoBehaviour
     [Header("DUNGEON")]
     #endregion
     #region Tooltip
-    [Tooltip("Populate with the dungeon RoomNodeTypeListSO")]
+    [Tooltip("Populate with the dungeon RoomBlockTypeListSO")]
     #endregion
 
-    public RoomNodeTypeListSO roomNodeTypeList;
+    public RoomBlockTypeListSO roomNodeTypeList;
 
     #region Header PLAYER
     [Space(10)]

@@ -28,7 +28,7 @@ public class DungeonLevelSO : ScriptableObject
     #region Tooltip
     [Tooltip("List with room node graphs which will be randomly selected for level.")]
     #endregion
-    public List<RoomNodeGraphSO> roomNodeGraphList;
+    public List<RoomBlockGraphSO> roomNodeGraphList;
 
     #region Validation
 #if UNITY_EDITOR
@@ -76,13 +76,13 @@ public class DungeonLevelSO : ScriptableObject
             Debug.Log(this.name.ToString() + ": " + nameof(roomTemplateList) + " does not contain a room template with an entrance node type.");
 
         // Loop through room node graphs to check that it's node type has been specified
-        foreach (RoomNodeGraphSO roomNodeGraph in roomNodeGraphList)
+        foreach (RoomBlockGraphSO roomNodeGraph in roomNodeGraphList)
         {
             if (roomNodeGraph == null)
                 return;
 
             // Check that room template has been selected for each node type, we can skip corridors and entrance
-            foreach (RoomNodeSO roomNodeSO in roomNodeGraph.roomNodeList)
+            foreach (RoomBlockSO roomNodeSO in roomNodeGraph.roomNodeList)
             {
                 if (roomNodeSO.roomNodeType.isCorridorEW || roomNodeSO.roomNodeType.isCorridorNS || roomNodeSO.roomNodeType.isEntrance
                     || roomNodeSO.roomNodeType.isCorridor || roomNodeSO.roomNodeType.isNone)

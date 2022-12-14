@@ -10,7 +10,7 @@ public class DungeonBuilder : SingletonMonoBehaviour<DungeonBuilder>
     public Dictionary<string, Room> dungBuilderRoomDict = new Dictionary<string, Room>();
     private Dictionary<string, RoomTemplateSO> roomTemplateDict = new Dictionary<string, RoomTemplateSO>();
     private List<RoomTemplateSO> roomTemplateList = null;
-    private RoomNodeTypeListSO roomNodeTypeList;
+    private RoomBlockTypeListSO roomNodeTypeList;
     private bool dungBuildComplete;
 
     protected override void Awake()
@@ -45,7 +45,7 @@ public class DungeonBuilder : SingletonMonoBehaviour<DungeonBuilder>
             dungBuildAttempts++;
 
             // Select random room node graph
-            RoomNodeGraphSO roomNodeGraph = SelectRandomRoomNodeGraph(currentDungLevel.roomNodeGraphList);
+            RoomBlockGraphSO roomNodeGraph = SelectRandomRoomNodeGraph(currentDungLevel.roomNodeGraphList);
 
             int dungRebuildAttemptsForRoomGraph = 0;
             dungBuildComplete = false;
@@ -98,14 +98,14 @@ public class DungeonBuilder : SingletonMonoBehaviour<DungeonBuilder>
     /// <summary>
     /// Select random room node graph from our list of them\
     /// </summary>
-    private bool TryToBuildRandomDung(RoomNodeGraphSO roomNodeGraph)
+    private bool TryToBuildRandomDung(RoomBlockGraphSO roomNodeGraph)
     {
 
         // Create Queue for room nodes
-        Queue<RoomNodeSO> roomNodeQueue = new Queue<RoomNodeSO>();
+        Queue<RoomBlockSO> roomNodeQueue = new Queue<RoomBlockSO>();
 
         // Add Entrance Node To Room Node Queue From Room Node Graph
-        RoomNodeSO entranceNode = roomNodeGraph.GetRoomNodeByType(roomNodeTypeList.list.Find(x => x.isEntrance));
+        RoomBlockSO entranceNode = roomNodeGraph.GetRoomNodeByType(roomNodeTypeList.list.Find(x => x.isEntrance));
 
         if (entranceNode != null)
         {
@@ -139,16 +139,16 @@ public class DungeonBuilder : SingletonMonoBehaviour<DungeonBuilder>
     /// <summary>
     /// Process rooms in room node queue, true if there are 0 overlaps
     /// </summary>
-    private bool ProcessRoomsInRoomNodeQueue(RoomNodeGraphSO roomNodeGraph, Queue<RoomNodeSO> roomNodeQueue, bool noRoomOverlaps)
+    private bool ProcessRoomsInRoomNodeQueue(RoomBlockGraphSO roomNodeGraph, Queue<RoomBlockSO> roomNodeQueue, bool noRoomOverlaps)
     {
         // lopp when queue is filled and no overlaps detected
         while (roomNodeQueue.Count > 0 && noRoomOverlaps)
         {
             // Get next room node from queue
-            RoomNodeSO roomNode = roomNodeQueue.Dequeue();
+            RoomBlockSO roomNode = roomNodeQueue.Dequeue();
 
             // add all child room nodes from the list
-            foreach (RoomNodeSO childRoomNode in roomNodeGraph.GetChildRoomNodes(roomNode))
+            foreach (RoomBlockSO childRoomNode in roomNodeGraph.GetChildRoomNodes(roomNode))
             {
                 roomNodeQueue.Enqueue(childRoomNode);
             }
@@ -177,7 +177,7 @@ public class DungeonBuilder : SingletonMonoBehaviour<DungeonBuilder>
     /// <summary>
     /// Check if room can be placed without overlaps
     /// </summary>
-    private bool CanBePlacedWithoutOverlaps(RoomNodeSO roomNode, Room parentRoom)
+    private bool CanBePlacedWithoutOverlaps(RoomBlockSO roomNode, Room parentRoom)
     {
         // flag
         bool roomOverlaps = true;
@@ -221,7 +221,7 @@ public class DungeonBuilder : SingletonMonoBehaviour<DungeonBuilder>
     /// <summary>
     /// Get random room template for chosen room node that fits to parent
     /// </summary>
-    private RoomTemplateSO GetRandomTemplateForRoomFittingToParent(RoomNodeSO roomNode, Doorway doorwayParent)
+    private RoomTemplateSO GetRandomTemplateForRoomFittingToParent(RoomBlockSO roomNode, Doorway doorwayParent)
     {
         RoomTemplateSO roomTemplate = null;
 
@@ -428,7 +428,7 @@ public class DungeonBuilder : SingletonMonoBehaviour<DungeonBuilder>
     /// Get a random room template from the roomtemplatelist that matches the roomType and return it
     /// (return null if no matching room templates found).
     /// </summary>
-    private RoomTemplateSO GetRandomRoomTemplate(RoomNodeTypeSO roomNodeType)
+    private RoomTemplateSO GetRandomRoomTemplate(RoomBlockTypeSO roomNodeType)
     {
         List<RoomTemplateSO> matchingRoomTemplateList = new List<RoomTemplateSO>();
 
@@ -469,7 +469,7 @@ public class DungeonBuilder : SingletonMonoBehaviour<DungeonBuilder>
     /// <summary>
     /// Create room based on roomTemplate and layoutNode, and return the created room
     /// </summary>
-    private Room CreateRoomFromRoomTemplate(RoomTemplateSO roomTemplate, RoomNodeSO roomNode)
+    private Room CreateRoomFromRoomTemplate(RoomTemplateSO roomTemplate, RoomBlockSO roomNode)
     {
         // Initialise room from template
         Room room = new Room();
@@ -508,7 +508,7 @@ public class DungeonBuilder : SingletonMonoBehaviour<DungeonBuilder>
     /// <summary>
     /// Copy string list
     /// </summary>
-    private RoomNodeGraphSO SelectRandomRoomNodeGraph(List<RoomNodeGraphSO> roomNodeGraphList)
+    private RoomBlockGraphSO SelectRandomRoomNodeGraph(List<RoomBlockGraphSO> roomNodeGraphList)
     {
         if (roomNodeGraphList.Count > 0)
         {

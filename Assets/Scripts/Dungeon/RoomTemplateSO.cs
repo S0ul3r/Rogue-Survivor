@@ -38,7 +38,7 @@ public class RoomTemplateSO : ScriptableObject
 
     #endregion Tooltip
 
-    public RoomNodeTypeSO roomNodeType;
+    public RoomBlockTypeSO roomNodeType;
 
     #region Tooltip
 
